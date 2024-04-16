@@ -19,13 +19,22 @@ if __name__ == "__main__":
     done_tasks = [task for task in todos if task.get("completed") is True]
 
     all_employees_data = {}
-    all_employees_data[employee_id] = []
-    for task in todos:
-        all_employees_data[employee_id].append({
-            "task": task.get("title"),
-            "completed": task.get("completed"),
-            "username": employee.get("username")
-        })
+
+    for employees in employee:
+        user_id = employees.get("id")
+        username = employees.get("username")
+
+        employees_tasks = [
+            {
+                "username": username,
+                "task": task["title"],
+                "completed": task["completed"],
+            }
+            for task in todos if task["userId"] == user_id
+        ]
+        all_employees_data[user_id] = employees_tasks
+
+    json_file = "todo_all_employees.json"
 
     with open("todo_all_employees.json", "w") as jsonfile:
         json.dump(all_employees_data, jsonfile)
