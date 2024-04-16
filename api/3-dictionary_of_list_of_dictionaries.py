@@ -20,19 +20,7 @@ if __name__ == "__main__":
 
     all_employees_data = {}
 
-    for employees in employee:
-        user_id = employees.get("id")
-        username = employees.get("username")
-
-        employees_tasks = [
-            {
-                "username": username,
-                "task": task["title"],
-                "completed": task["completed"],
-            }
-            for task in todos if task["userId"] == user_id
-        ]
-        all_employees_data[user_id] = employees_tasks
+    # This part is always wrong so trying again after
 
     json_file = "todo_all_employees.json"
 
